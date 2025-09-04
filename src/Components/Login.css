@@ -46,8 +46,12 @@ html {
 .descricao-login {
     width: 320px;
     height: 40px;
-    background-color: aquamarine;
-    margin-top: 20px;
+    margin-top: 30px;
+    color: rgb(86, 86, 86);
+    text-align: center;
+    font-size: 15px;
+    letter-spacing: 0.80px;
+    font-weight: 500;
 }
 
 .input-container {
@@ -105,6 +109,15 @@ html {
     margin-top: 20px;
     font-size: 12px;
     cursor: pointer;
+}
+
+.erro-login{
+    width: 320px;
+    height: 20px;
+    text-align: center;
+    font-size: 14px;
+    margin-top: 10px;
+    color: red;
 }
 
 .botao-login {
