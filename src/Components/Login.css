@@ -46,7 +46,7 @@ html {
 .descricao-login {
     width: 320px;
     height: 40px;
-    margin-top: 30px;
+    margin-top: 10px;
     color: rgb(86, 86, 86);
     text-align: center;
     font-size: 15px;
@@ -124,6 +124,7 @@ html {
     width: 320px;
     height: 40px;
     border-radius: 26px;
+    margin-top: 10px;
     font-size: 14px;
     border: none;
     color: white;
@@ -134,13 +135,16 @@ html {
 }
 
 .botao-login:hover {
-    background-color: rgb(111, 152, 195);
+    background-color: rgb(66, 129, 196);
     transform: scale(1.03);
 }
 
 .caixa-login-2 {
     width: 25rem;
     height: 31.25rem;
+    background-image: url(/public/imagem_login.png);
+    background-position: center;
+    background-size: cover;
     background-color: rgb(111, 152, 195);
     border-top-right-radius: 26px;
     border-bottom-right-radius: 26px;

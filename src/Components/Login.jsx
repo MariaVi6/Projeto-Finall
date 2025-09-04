@@ -1,10 +1,14 @@
 import "./Login.css"
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 const Login = () => {
 
     const [matricula, setMatricula] = useState("");
     const [senha, setSenha] = useState("");
     const [erro, setErro] = useState("");
+
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -21,13 +25,15 @@ const Login = () => {
 
         console.log("Matrícula:", matricula, "Senha:", senha);
         setErro("");
+
+        navigate("/home");
     }
 
     return (
         <>
             <form className="container-login" onSubmit={handleSubmit}>
                 <div className="caixa-login-1">
-                    <img className="logo-login" alt="logo-da-escola-faculdade" />
+                    <img className="logo-login" src="/public/logo-2.svg" alt="logo-da-escola-faculdade" />
                     <p className="descricao-login">Bem vindo aos serviços digitais da Universidade IntelliPort</p>
 
                     <div className="input-container">
