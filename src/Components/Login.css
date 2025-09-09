@@ -7,8 +7,7 @@
     font-style: normal;
 }
 
-body,
-html {
+.pagina-login{
     height: 100vh;
     margin: 0;
     display: flex;
@@ -33,7 +32,7 @@ html {
     background-color: rgb(255, 255, 255);
     border-top-left-radius: 26px;
     border-bottom-left-radius: 26px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.35);
 }
 
 .logo-login {
@@ -52,6 +51,7 @@ html {
     font-size: 15px;
     letter-spacing: 0.80px;
     font-weight: 500;
+    line-height: 20px;
 }
 
 .input-container {
@@ -142,11 +142,11 @@ html {
 .caixa-login-2 {
     width: 25rem;
     height: 31.25rem;
-    background-image: url(/public/imagem_login.png);
+    background-image: url(/src/Image/INTELIIPORT-Login.svg);
     background-position: center;
     background-size: cover;
-    background-color: rgb(111, 152, 195);
+    background-color: rgb(178, 192, 207);
     border-top-right-radius: 26px;
     border-bottom-right-radius: 26px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.35);
 }
