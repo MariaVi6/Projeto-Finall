@@ -1,0 +1,100 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+}
+
+.container-home {
+    width: 1440px;
+    height: 100vh;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.calendarios-eventos {
+    width: 1000px;
+    height: 600px;
+    margin-right: 20px;
+    border: 2px solid rgb(188, 188, 188);
+}
+
+.titulo-calendarios-eventos {
+    width: 100%;
+    height: 60px;
+    background-color: #00339C;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    color: white;
+    font-weight: 400;
+}
+.itens-calendarios-eventos{
+    width: 100%;
+    height: 80px;
+    background-color: aqua;
+    margin-top: 8px;
+}
+.div-notas{
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.notas {
+    width: 100%;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid rgb(188, 188, 188);
+}
+
+.titulo-notas {
+    width: 100%;
+    height: 60px;
+    background-color: #00339C;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    color: white;
+    font-weight: 400;
+}
+
+.input-notas {
+    width: 380px;
+    height: 40px;
+    margin-top: 20px;
+    font-size: 14px;
+    padding: 8px;
+}
+
+.input-notas::placeholder {
+    color: #999;
+    font-size: 14px;
+    padding-left: 2px;
+}
+
+.caixa-guarda-notas {
+    width: 380px;
+    height: 300px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.nota{
+    width: 380px;
+    height: 20px;
+    margin-top: 20px;
+}
+.torpedos{
+    width: 100%;
+    height: 400px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid rgb(188, 188, 188);
+}

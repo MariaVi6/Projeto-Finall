@@ -7,11 +7,21 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Usuario{
+model Usuario {
   id Int @id @default(autoincrement())
-  email String @unique 
-  senha String 
+  nome String
+  email String @unique
   cargo String
+  senha String
   criado_em DateTime @default(now())
   alterado_em DateTime @updatedAt
+  notas Nota[]
+}
+
+model Nota {
+  id Int @id @default(autoincrement())
+  resultado Float
+  materia String
+  usuarioId Int
+  usuario Usuario @relation(fields: [usuarioId], references: [id])
 }

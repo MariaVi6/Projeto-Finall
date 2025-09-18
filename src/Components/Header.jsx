@@ -8,7 +8,7 @@ const Header = () => {
             <div className="itens-indice-header">Frequência</div>
             <div className="itens-indice-header">Notas</div>
             <div className="itens-indice-header">Comunicação</div>
-            <div className="itens-indice-header">Finaceiro</div>
+            <div className="itens-indice-header">Matricula</div>
         </div>
         <div className="login-aluno"></div>
     </div>
