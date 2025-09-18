@@ -12,11 +12,13 @@ const prisma = new PrismaClient();
 app.use(cors());
 app.use(express.json());
 
+// LISTAR USUÁRIOS
 app.get('/usuarios', async (_req, res) => {
   const usuarios = await prisma.usuario.findMany();
   res.json(usuarios);
 });
 
+// BUSCAR USUÁRIO POR ID
 app.get('/usuarios/:id', async (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -24,7 +26,7 @@ app.get('/usuarios/:id', async (req, res) => {
 
     if (!usuario) {
       res.status(404).json({ message: "Usuário não encontrado" });
-      return
+      return;
     }
 
     res.json(usuario);
@@ -33,25 +35,34 @@ app.get('/usuarios/:id', async (req, res) => {
   }
 });
 
+// CADASTRAR
 app.post('/usuarios', async (req, res) => {
   try {
-    const { email, senha, cargo } = req.body;
-    const verificar = await prisma.usuario.findUnique({ where: { email } });
+    const { email, senha, nome, cargo } = req.body;
+
+    const verificar = await prisma.usuario.findUnique({
+      where: { email }
+    });
 
     if (verificar) {
       res.status(400).json({ message: "Usuário já existente" });
-      return
+      return;
     }
 
     const adicionar = await prisma.usuario.create({
       data: {
         email,
         senha: await bcrypt.hash(senha, 12),
-        cargo: cargo
+        nome,
+        cargo
       }
     });
 
-    const token = jwt.sign({ id: adicionar.id, email: adicionar.email }, "senha1234", { expiresIn: "1h" });
+    const token = jwt.sign(
+      { id: adicionar.id, email: adicionar.email },
+      "senha1234",
+      { expiresIn: "1h" }
+    );
 
     res.status(201).json({ message: "Usuário adicionado com sucesso", data: { token } });
   } catch (error) {
@@ -59,6 +70,7 @@ app.post('/usuarios', async (req, res) => {
   }
 });
 
+// LOGIN
 app.post('/logar', async (req, res) => {
   try {
     const { email, senha } = req.body;
@@ -66,22 +78,23 @@ app.post('/logar', async (req, res) => {
 
     if (!usuario) {
       res.status(401).json({ message: "Email ou senha inválida" });
-      return
+      return;
     }
 
     const e_valido = await bcrypt.compare(senha, usuario.senha);
 
     if (!e_valido) {
       res.status(401).json({ message: "Email ou senha inválida" });
-      return
+      return;
     }
 
-    res.json({ message: "Logado com sucesso", e_valido });
+    res.json({ message: "Logado com sucesso" });
   } catch (error) {
     res.status(500).json({ message: `Erro inesperado: ${error}` });
   }
 });
 
+// ATUALIZAR SENHA
 app.put('/usuarios/:id', async (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -90,7 +103,7 @@ app.put('/usuarios/:id', async (req, res) => {
 
     if (!usuario) {
       res.status(404).json({ message: "ID não encontrado" });
-      return
+      return;
     }
 
     const alterar = await prisma.usuario.update({
@@ -104,6 +117,7 @@ app.put('/usuarios/:id', async (req, res) => {
   }
 });
 
+// DELETAR USUÁRIO
 app.delete('/usuarios/:id', async (req, res) => {
   const id = parseInt(req.params.id);
   try {
@@ -111,12 +125,10 @@ app.delete('/usuarios/:id', async (req, res) => {
 
     if (!usuario) {
       res.status(404).json({ message: "ID não encontrado" });
-      return
+      return;
     }
 
-    const deletar = await prisma.usuario.delete({
-      where: { id }
-    });
+    const deletar = await prisma.usuario.delete({ where: { id } });
 
     res.json({ message: "Usuário deletado com sucesso", deletar });
   } catch (error) {
@@ -124,30 +136,31 @@ app.delete('/usuarios/:id', async (req, res) => {
   }
 });
 
+// CRIAR NOTA
 app.post('/usuarios/:id/notas', async (req, res) => {
   try {
     const usuarioId = parseInt(req.params.id);
-    const { valor, materia } = req.body;
+    const { resultado, materia } = req.body;
 
-    if (valor == null) {
-      res.status(400).json({ message: "Valor inválido" });
-      return
+    if (resultado == null) {
+      res.status(400).json({ message: "Resultado inválido" });
+      return;
     }
 
     if (!materia) {
       res.status(400).json({ message: "Matéria é obrigatória" });
-      return
+      return;
     }
 
     const usuario = await prisma.usuario.findUnique({ where: { id: usuarioId } });
 
     if (!usuario) {
       res.status(404).json({ message: "Usuário não encontrado" });
-      return
+      return;
     }
 
     const nota = await prisma.nota.create({
-      data: { valor, materia, usuario: { connect: { id: usuarioId } } }
+      data: { resultado, materia, usuario: { connect: { id: usuarioId } } }
     });
 
     res.status(201).json({ message: "Nota criada com sucesso", nota });
@@ -156,6 +169,7 @@ app.post('/usuarios/:id/notas', async (req, res) => {
   }
 });
 
+// LISTAR NOTAS DE UM USUÁRIO
 app.get('/usuarios/:id/notas', async (req, res) => {
   const id = parseInt(req.params.id);
   try {
@@ -166,7 +180,7 @@ app.get('/usuarios/:id/notas', async (req, res) => {
 
     if (!usuario) {
       res.status(404).json({ message: "Usuário não encontrado" });
-      return
+      return;
     }
 
     res.json(usuario);
@@ -175,24 +189,25 @@ app.get('/usuarios/:id/notas', async (req, res) => {
   }
 });
 
+// ATUALIZAR NOTA
 app.put('/notas/:id', async (req, res) => {
   try {
     const id = parseInt(req.params.id);
-    const { valor, materia } = req.body;
+    const { resultado, materia } = req.body;
 
-    if (valor == null) {
-      res.status(400).json({ message: "Valor inválido" });
-      return
+    if (resultado == null) {
+      res.status(400).json({ message: "Resultado inválido" });
+      return;
     }
 
     if (!materia) {
       res.status(400).json({ message: "Matéria é obrigatória" });
-      return
+      return;
     }
 
     const nota = await prisma.nota.update({
       where: { id },
-      data: { valor, materia }
+      data: { resultado, materia }
     });
 
     res.json({ message: "Nota atualizada com sucesso", nota });
@@ -201,6 +216,7 @@ app.put('/notas/:id', async (req, res) => {
   }
 });
 
+// DELETAR NOTA
 app.delete('/notas/:id', async (req, res) => {
   try {
     const id = parseInt(req.params.id);
