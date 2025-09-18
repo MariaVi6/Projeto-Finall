@@ -38,7 +38,7 @@ app.get('/usuarios/:id', async (req, res) => {
 // CADASTRAR
 app.post('/usuarios', async (req, res) => {
   try {
-    const { email, senha, nome, cargo } = req.body;
+    const { email, senha, nome } = req.body;
 
     const verificar = await prisma.usuario.findUnique({
       where: { email }
@@ -51,10 +51,9 @@ app.post('/usuarios', async (req, res) => {
 
     const adicionar = await prisma.usuario.create({
       data: {
+        nome,
         email,
         senha: await bcrypt.hash(senha, 12),
-        nome,
-        cargo
       }
     });
 
@@ -66,6 +65,7 @@ app.post('/usuarios', async (req, res) => {
 
     res.status(201).json({ message: "Usuário adicionado com sucesso", data: { token } });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: `Erro inesperado: ${error}` });
   }
 });

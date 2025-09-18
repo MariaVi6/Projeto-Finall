@@ -1,8 +1,7 @@
 import "./Login.css";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-import { use } from "react";
 
 const Login = () => {
     const [modo, setModo] = useState("login");
@@ -12,9 +11,27 @@ const Login = () => {
     const [senha, setSenha] = useState("");
     const [sucesso, setSucesso] = useState("");
     const [erro, setErro] = useState("");
+    const navigate = useNavigate();
+
+    const trocarModo = (modo) => {
+      limparMensagens();
+      setModo(modo);
+    }
+
+    const limparMensagens = () => {
+      setErro("");
+      setSucesso("");
+    }
+
+    const limparCampos = () => {
+      setNome("");
+      setEmail("");
+      setSenha("");
+    }
 
     const logar = async (e) => {
         e.preventDefault();
+        limparMensagens();
 
         if (!email || !senha) {
             setErro("Preencha todos os campos.");
@@ -31,17 +48,17 @@ const Login = () => {
                 email,
                 senha,
             });
-            setEmail("");
-            setSenha("");
-            setErro("");
+            limparCampos();
             setSucesso("Logado com sucesso");
-        } catch (error) {
+            navigate("/home");
+        } catch {
             setErro("Email ou senha incorreta.");
         }
     };
 
     const cadastrar = async (e) => {
         e.preventDefault();
+        limparMensagens();
 
         if (!email || !senha) {
             setErro("Preencha todos os campos.");
@@ -55,16 +72,15 @@ const Login = () => {
 
         try {
             const res = await axios.post("http://localhost:3000/usuarios", {
+                nome,
                 email,
                 senha,
             });
             setUsuario([...usuario, res.data]);
-            setEmail("");
-            setSenha("");
-            setErro("");
+            limparCampos();
             setSucesso("Cadastrado com sucesso");
-        } catch (error) {
-            setErro("Usuario já existente");
+        } catch {
+            setErro(`Usuario já existente!`);
         }
     };
 
@@ -79,11 +95,11 @@ const Login = () => {
                         <p className="descricao-login">Bem vindo aos serviços digitais da Universidade IntelliPort</p>
 
                         <div className="input-container">
-                            <input className="input-login" type="email" id="email" placeholder=" " value={email} onChange={(e) => setEmail(e.target.value)}/>
+                            <input className="input-login" type="email" id="email" name="email" placeholder=" " value={email} onChange={(e) => setEmail(e.target.value)}/>
                             <label className="label-login" htmlFor="email">Email</label>
                         </div>
                         <div className="input-container">
-                            <input className="input-login" type="password" id="senha" placeholder=" " value={senha} onChange={(e) => setSenha(e.target.value)}/>
+                            <input className="input-login" type="password" id="senha" name="senha" placeholder=" " value={senha} onChange={(e) => setSenha(e.target.value)}/>
                             <label className="label-login" htmlFor="senha">Senha</label>
                             <h6 className="esqueceu-senha">Esqueceu a senha?</h6>
 
@@ -91,8 +107,8 @@ const Login = () => {
                             {sucesso && <p className="sucesso-login">{sucesso}</p>}
                         </div>
 
-                        <Link to={"/home"}><button className="botao-login" type="submit">Acessar</button></Link>
-                        <h6 className="trocar-paineis" onClick={() => setModo("registro")} >Não tem conta? Registrar</h6>
+                        <button className="botao-login" type="submit">Acessar</button>
+                        <h6 className="trocar-paineis" onClick={() => trocarModo('registro')} >Não tem conta? Registrar</h6>
                     </form>
 
                     {/* CAIXA IMAGEM */}
@@ -118,14 +134,12 @@ const Login = () => {
                             <input className="input-login" type="password" id="senha" placeholder=" " value={senha} onChange={(e) => setSenha(e.target.value)}/>
                             <label className="label-login" htmlFor="senha">Senha</label>
 
-
                             {erro && <p className="erro-login">{erro}</p>}
                             {sucesso && <p className="sucesso-login">{sucesso}</p>}
                         </div>
 
-                        <Link to={"/home"}></Link><button className="botao-login" type="submit">Registrar</button>
-
-                        <h6 className="trocar-modo-2" onClick={() => setModo("login")} >Já tem conta? Entrar</h6>
+                        <button className="botao-login" type="submit">Registrar</button>
+                        <h6 className="trocar-modo-2" onClick={() => trocarModo('login')} >Já tem conta? Entrar</h6>
                     </form>
 
                 </div>

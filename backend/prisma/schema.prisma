@@ -11,7 +11,7 @@ model Usuario {
   id Int @id @default(autoincrement())
   nome String
   email String @unique
-  cargo String
+  cargo String @default("aluno")
   senha String
   criado_em DateTime @default(now())
   alterado_em DateTime @updatedAt
