@@ -1,53 +1,92 @@
 import "./CorpoHome.css"
-import { useState } from "react";
-const CorpoHome = () => {
+import { useState, useEffect } from "react";
 
+const CorpoHome = () => {
     const [texto, settexto] = useState(" ");
     const [notas, setnotas] = useState([]);
+    const [noticias, setNoticias] = useState([]);
 
-    const handleKeyDown = (e) =>{
+    // Puxar 6 notícias de educação automaticamente
+    useEffect(() => {
+        fetch("https://gnews.io/api/v4/search?q=educação&lang=pt&country=br&max=6&apikey=9451468b279297f04224cb82492e2519")
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.articles) {
+                    setNoticias(data.articles);
+                }
+            })
+            .catch((err) => console.error("Erro ao buscar notícias:", err));
+    }, []);
 
-        if(e.key === "Enter") {
+    const handleKeyDown = (e) => {
+        if (e.key === "Enter") {
             e.preventDefault();
-            if(texto.trim() !== ""){
+            if (texto.trim() !== "") {
                 setnotas([...notas, texto]);
                 settexto("");
             }
         }
+    };
 
-    }
+    const deletarNota = (index) => {
+        setnotas(notas.filter((_, i) => i !== index));
+    };
 
     return ( 
-    <>
-    <div className="container-home">
-        <div className="div-calendarios-eventos">
-        <div className="calendarios-eventos">
-            <div className="titulo-calendarios-eventos">Notícias</div>
-            <div className="itens-calendarios-eventos"></div>
-            <div className="itens-calendarios-eventos"></div>
-            <div className="itens-calendarios-eventos"></div>
-            <div className="itens-calendarios-eventos"></div>
-            <div className="itens-calendarios-eventos"></div>
-            <div className="itens-calendarios-eventos"></div>
+        <>
+        <div className="container-home">
+            {/* Notícias */}
+            <div className="div-calendarios-eventos">
+                <div className="calendarios-eventos">
+                    <div className="titulo-calendarios-eventos">Notícias</div>
+                    
+                    {noticias.map((noticia, index) => (
+                        <div key={index} className="itens-calendarios-eventos">
+                            <h3 className="titulo-noticia" >{noticia.title}</h3>
+                            <p className="conteudo-noticia" >{noticia.description}</p>
+                            <a className="ler-mais-noticias" href={noticia.url} target="_blank" rel="noopener noreferrer">
+                                Ler mais
+                            </a>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+            {/* Bloco de Notas */}
+            <div className="div-notas">
+                <div className="notas">
+                    <h2 className="titulo-notas">
+                        <div>Bloco de Notas</div>
+                    </h2>
+
+                    <textarea 
+                        className="input-notas" 
+                        placeholder="Digite seu lembrete" 
+                        value={texto} 
+                        onChange={(e) => settexto(e.target.value)} 
+                        onKeyDown={handleKeyDown}
+                    ></textarea>
+
+                    <div className="caixa-guarda-notas">
+                        {notas.map((n, i) => (
+                            <div className="nota" key={i}>
+                                {n}
+                                <button 
+                                    className="botao-excluir-notas" 
+                                    onClick={() => deletarNota(i)}
+                                >Excluir</button>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                <div className="torpedos">
+                    <h2 className="titulo-notas">Comunicação</h2>
+                </div>
+            </div>
         </div>
-        </div>
-        <div className="div-notas">
-        <div className="notas">
-            <h2 className="titulo-notas">
-                <div>Bloco de Notas</div>
-            </h2>
-            <textarea className="input-notas" placeholder="Digite seu lembrete" value={texto} onChange={(e) => settexto(e.target.value)} onKeyDown={handleKeyDown}></textarea>
-            <div className="caixa-guarda-notas">{notas.map((n, i) => (
-        <div className="nota" key={i}>{n} </div>
-        ))}</div>
-        </div>
-        <div className="torpedos">
-            <h2 className="titulo-notas">Comunicação</h2>
-        </div>
-        </div>
-    </div>
-    </>
+        </>
     );
-}
+};
 
 export default CorpoHome;

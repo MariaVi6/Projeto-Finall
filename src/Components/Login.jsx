@@ -14,19 +14,20 @@ const Login = () => {
     const navigate = useNavigate();
 
     const trocarModo = (modo) => {
-      limparMensagens();
-      setModo(modo);
+        limparMensagens();
+        limparCampos();
+        setModo(modo);
     }
 
     const limparMensagens = () => {
-      setErro("");
-      setSucesso("");
+        setErro("");
+        setSucesso("");
     }
 
     const limparCampos = () => {
-      setNome("");
-      setEmail("");
-      setSenha("");
+        setNome("");
+        setEmail("");
+        setSenha("");
     }
 
     const logar = async (e) => {

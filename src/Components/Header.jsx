@@ -10,7 +10,9 @@ const Header = () => {
             <div className="itens-indice-header">Comunicação</div>
             <div className="itens-indice-header">Matricula</div>
         </div>
-        <div className="login-aluno"></div>
+        <div className="login-aluno">
+            <div className="aluno"></div>
+        </div>
     </div>
     </>
 );

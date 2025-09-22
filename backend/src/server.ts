@@ -88,7 +88,13 @@ app.post('/logar', async (req, res) => {
       return;
     }
 
-    res.json({ message: "Logado com sucesso" });
+  const token = jwt.sign(
+    { id: usuario.id, email: usuario.email },
+    "senha1234",
+    { expiresIn: "1h" }
+  );
+
+  res.status(200).json({ message: "Logado com sucesso", data: { "access_token": token } });
   } catch (error) {
     res.status(500).json({ message: `Erro inesperado: ${error}` });
   }
