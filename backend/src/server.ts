@@ -12,6 +12,10 @@ const prisma = new PrismaClient();
 app.use(cors());
 app.use(express.json());
 
+app.get('/', async (_req, res) => {
+  res.status(200).json({ message: "ok" });
+});
+
 // LISTAR USUÁRIOS
 app.get('/usuarios', async (_req, res) => {
   const usuarios = await prisma.usuario.findMany();
@@ -241,6 +245,31 @@ app.delete('/notas/:id', async (req, res) => {
     const nota = await prisma.nota.delete({ where: { id } });
 
     res.json({ message: "Nota deletada com sucesso", nota });
+  } catch (error) {
+    res.status(500).json({ message: `Erro inesperado: ${error}` });
+  }
+});
+
+app.get('/noticias', async (_req, res) => {
+  try {
+    const apiKey = process.env.GNEWS_API_KEY;
+
+    if (!apiKey) {
+      res.status(500).json({ message: "API key não configurada" });
+      return;
+    }
+
+    const response = await fetch(
+      `https://gnews.io/api/v4/search?q=educação&lang=pt&country=br&max=6&apikey=${apiKey}`
+    );
+
+    if (!response.ok) {
+      res.status(response.status).json({ message: "Erro ao buscar notícias" });
+      return;
+    }
+
+    const data = await response.json();
+    res.json(data);
   } catch (error) {
     res.status(500).json({ message: `Erro inesperado: ${error}` });
   }

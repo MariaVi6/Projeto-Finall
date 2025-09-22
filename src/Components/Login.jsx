@@ -68,8 +68,8 @@ const Login = () => {
       limparCampos()
       setSucesso('Logado com sucesso')
       navigate('/home')
-    } catch (error) {
-      setErro('Email ou senha incorreta.' + error)
+    } catch {
+      setErro('Email ou senha incorreta.')
     }
   }
 

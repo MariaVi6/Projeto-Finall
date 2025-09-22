@@ -1,12 +1,32 @@
-import { useEffect } from 'react'
-import './Header.css'
-const Header = () => {
-  useEffect(() => {
-    const token = localStorage.getItem('access_token')
-    if (!token) window.location.href = '/'
-  }, [])
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-  const usuario = JSON.parse(localStorage.getItem('usuario'))
+import './Header.css'
+
+const Header = () => {
+  const [token, setToken] = useState(localStorage.getItem('access_token') || '')
+  const [usuario, setUsuario] = useState(JSON.parse(localStorage.getItem('usuario')) || null)
+
+  const navigate = useNavigate()
+
+  const limparCredenciais = () => {
+    localStorage.removeItem('access_token')
+    localStorage.removeItem('usuario')
+    setToken('')
+    setUsuario(null)
+  }
+
+  const logout = () => {
+    limparCredenciais()
+    navigate('/')
+  }
+
+  useEffect(() => {
+    if (!token || !usuario) {
+      console.log('teste')
+      navigate('/')
+    }
+  }, [token, usuario, navigate])
 
   return (
     <>
@@ -19,7 +39,12 @@ const Header = () => {
           <div className="itens-indice-header">Matricula</div>
         </div>
         <div className="login-aluno">
-          <div className="aluno">{usuario.nome || 'Fulano de Tal'}</div>
+          <div className="aluno">{usuario && (usuario.nome || 'Fulano de Tal')}</div>
+          <div className="aluno">
+            <a className="cursor-pointer" onClick={logout}>
+              Sair
+            </a>
+          </div>
         </div>
       </div>
     </>
