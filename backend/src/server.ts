@@ -63,7 +63,13 @@ app.post('/usuarios', async (req, res) => {
       { expiresIn: "1h" }
     );
 
-    res.status(201).json({ message: "Usuário adicionado com sucesso", data: { token } });
+    res.status(201).json({
+      message: "Usuário adicionado com sucesso",
+      data: {
+        usuario: { nome: adicionar.nome },
+        "access_token": token,
+      }
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: `Erro inesperado: ${error}` });
@@ -88,13 +94,19 @@ app.post('/logar', async (req, res) => {
       return;
     }
 
-  const token = jwt.sign(
-    { id: usuario.id, email: usuario.email },
-    "senha1234",
-    { expiresIn: "1h" }
-  );
+    const token = jwt.sign(
+      { id: usuario.id, email: usuario.email },
+      "senha1234",
+      { expiresIn: "1h" }
+    );
 
-  res.status(200).json({ message: "Logado com sucesso", data: { "access_token": token } });
+    res.status(200).json({
+      message: "Logado com sucesso",
+      data: {
+        usuario: { nome: usuario.nome },
+        "access_token": token,
+      }
+    });
   } catch (error) {
     res.status(500).json({ message: `Erro inesperado: ${error}` });
   }
