@@ -1,0 +1,127 @@
+body {
+  margin: 0%;
+}
+
+/* --- Começo da Barra lateral --- */
+/*onde fica a parte do professor e afins*/
+.perfil-professor {
+  display: flex;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+.barra-lateral {
+  width: 280px;
+  background: #143680;
+  padding: 20px;
+  text-align: center;
+  color: #fff;
+  min-height: 100vh;
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.foto-professor {
+  border-radius: 90%;
+  border: 3px solid #00ffff;
+  width: 140px;
+  margin-bottom: 10px;
+}
+
+.barra-lateral h3 {
+  margin: 10px 0 5px;
+  font-size: 18px;
+}
+
+.barra-lateral p {
+  font-size: 14px;
+  opacity: 0.9;
+  margin-bottom: 20px;
+}
+
+/*Menu da barra lateral */
+/*onde fica os icones de */
+.menu-barra-lateral {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.menu-barra-lateral a {
+  border: 1px solid rgba(101, 83, 201, 0.226);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 10px;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.menu-barra-lateral a:hover {
+  background: #1d4ed8;
+  transform: translateX(5px);
+}
+
+.menu-barra-lateral img {
+  color:#f9f9f9;
+  width: 20px;
+  height: 20px;
+}
+
+/* --- Conteúdo principal --- */
+.conteudo {
+  flex: 1;
+  padding: 40px;
+  background: #f9f9f9;
+}
+
+/* Header de boas-vindas */
+.barra-bemvindo {
+  background: linear-gradient(90deg, #143680, #1d4ed8);
+  color: white;
+  padding: 20px 30px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.barra-bemvindo h2 {
+  margin: 0;
+  font-weight: bold;
+}
+
+/* --- Cards --- */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.card p {
+  font-size: 14px;
+  color: #555;
+}
+
+.card h3 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #143680;
+}
