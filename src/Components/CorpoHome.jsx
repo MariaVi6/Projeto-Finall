@@ -1,3 +1,4 @@
+import Chat from './Chat'
 import './CorpoHome.css'
 import { useState, useEffect } from 'react'
 
@@ -80,6 +81,7 @@ const CorpoHome = () => {
 
           <div className="torpedos">
             <h2 className="titulo-notas">Comunicação</h2>
+            <Chat />
           </div>
         </div>
       </div>
