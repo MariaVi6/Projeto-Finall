@@ -7,28 +7,47 @@
     font-style: normal;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+    /* Força a largura para 100% da tela */
+    width: 100% !important;
+    /* Esconde qualquer conteúdo que ultrapasse a largura horizontal */
+    overflow-x: hidden !important;
+    margin: 0;
+    padding: 0;
+}
+
 .header {
-    width: 1440px;
+    width: 100%;
     height: 60px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.35);
 }
 
 .logo-home {
     width: 220px;
     height: 60px;
+
 }
 
 .indice-header {
-    width: 1000px;
+    flex-grow: 1;
     height: 60px;
     display: flex;
     background-color: #00339C;
 }
 
 .itens-indice-header {
-    width: 250px;
+    flex-grow: 1;
     height: 60px;
     font-size: 16px;
     display: flex;
@@ -43,7 +62,28 @@
 .login-aluno {
     width: 220px;
     height: 60px;
-    background-color: darkgray;
+    background-color: #00339C;
+}
+
+.aluno {
+    width: 100%;
+    height: 30px;
+    font-size: 14px;
+    margin-top: 5px;
+    display: flex;
+    padding-left: 38px;
+    align-items: center;
+    color: white;
+}
+
+.div-botao-sair {
+    width: 100%;
+    height: 20px;
+    color: white;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    padding-left: 38px;
 }
 
 .cursor-pointer {

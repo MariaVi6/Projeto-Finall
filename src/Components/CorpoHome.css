@@ -5,8 +5,24 @@
     font-family: "Montserrat", sans-serif;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+    overflow-x: hidden;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
 .container-home {
-    width: 1440px;
+    width: 100%;
     height: auto;
     margin-top: 20px;
     display: flex;
@@ -17,19 +33,20 @@
     width: 1000px;
     height: auto;
     margin-right: 20px;
-    border: 2px solid rgb(188, 188, 188);
+    border: 2px solid rgb(213, 213, 213);
 }
 
 .titulo-calendarios-eventos {
     width: 100%;
     height: 60px;
-    background-color: #00339C;
+    background-color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 18px;
-    color: white;
-    font-weight: 400;
+    color: #00339C;
+    font-weight: 500;
+    box-shadow: 0 2px 2px rgba(0, 25, 149, 0.35);
 }
 
 .itens-calendarios-eventos {
@@ -73,8 +90,9 @@
     cursor: pointer;
 }
 
-.div-notas {
+.div-notas-assistente-virtual {
     width: 400px;
+    height: 600px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -86,19 +104,21 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 2px solid rgb(188, 188, 188);
+    border: 2px solid rgb(213, 213, 213);
 }
 
 .titulo-notas {
     width: 100%;
     height: 60px;
-    background-color: #00339C;
+    min-height: 60px;
+    background-color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 18px;
-    color: white;
-    font-weight: 400;
+    color: #00339C;
+    font-weight: 500;
+    box-shadow: 0 2px 2px rgba(0, 25, 149, 0.35);
 }
 
 .input-notas {
@@ -106,7 +126,6 @@
     height: 40px;
     margin-top: 20px;
     font-size: 14px;
-    padding: 8px;
 }
 
 .input-notas::placeholder {
@@ -127,18 +146,39 @@
     height: 20px;
     margin-top: 20px;
 }
-.botao-excluir-notas{
+
+.botao-adicionar-notas {
+    width: 100px;
+    height: 26px;
+    margin-top: 20px;
+}
+
+.botao-excluir-notas {
     width: 60px;
     height: 20px;
     margin-left: 10px;
 }
 
-.torpedos {
+.assistente-virtual {
     width: 100%;
-    height: 400px;
+    height: 200px;
     margin-top: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 2px solid rgb(188, 188, 188);
+    border: 2px solid rgb(213, 213, 213);
+}
+
+.titulo-assistente-virtual {
+    width: 100%;
+    height: 60px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    color: #00339C;
+    font-weight: 500;
+    margin-bottom: 40px;
+    box-shadow: 0 2px 2px rgba(0, 25, 149, 0.35);
 }

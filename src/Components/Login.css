@@ -102,7 +102,7 @@
 .input-container {
     position: relative;
     width: 320px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .input-login {
@@ -114,6 +114,7 @@
     font-size: 12px;
     outline: none;
     background-color: #fff;
+    margin-bottom: 10px;
 }
 
 .label-login {
@@ -148,7 +149,7 @@
     letter-spacing: 0.8px;
     cursor: pointer;
     transition: 0.3s ease;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .botao-login:hover {
@@ -170,7 +171,7 @@
 .trocar-modo-2 {
     width: 320px;
     height: 20px;
-    margin-top: 10px;
+    margin-top: 20px;
     font-size: 12px;
     color: rgb(0,60,179);
     text-align: center;
@@ -192,12 +193,20 @@
     color: red;
     font-size: 14px;
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+.erro-login-2 {
+    color: red;
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 5px;
+    margin-top: 10px;
 }
 
 .sucesso-login {
     color: green;
     font-size: 14px;
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }

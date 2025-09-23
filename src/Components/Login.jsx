@@ -147,7 +147,7 @@ const Login = () => {
               Acessar
             </button>
             <h6 className="trocar-paineis" onClick={() => trocarModo('registro')}>
-              Não tem conta? Registrar
+              Não tem conta? Registrar-se
             </h6>
           </form>
 
@@ -204,7 +204,7 @@ const Login = () => {
                 Senha
               </label>
 
-              {erro && <p className="erro-login">{erro}</p>}
+              {erro && <p className="erro-login-2">{erro}</p>}
               {sucesso && <p className="sucesso-login">{sucesso}</p>}
             </div>
 
