@@ -1,17 +1,18 @@
-import "./PerfilProfessor.css";
+import "./Perfil.css";
 
-const PerfilProfessor = () => {
+const Perfil = () => {
+  const [usuario, setUsuario] = useState(JSON.parse(localStorage.getItem('usuario')) || null)
   return (
-    <div className="perfil-professor">
+    <div className="perfil-usuário">
 
       <aside className="barra-lateral">
         <img
-          className="foto-professor"
-          src="https://cdn.mindminers.com/blog/uploads/2021/05/Dani-Almeida_auto_x1.png"
+          className="foto-usuário"
+          src="https://cdn-icons-png.flaticon.com/512/3106/3106807.png"
 
-          alt="Icone de Foto de Perfil do Professor"
+          alt="Icone de Foto de Perfil do usuário"
         />
-        <h3>(nome exemplar) Nathália Almeida.</h3>
+        <h3>Olá, {usuario && (usuario.nome || 'Fulano de Tal')}</h3>
         <p>Docente em Análise e Desenvolvimento de Sistemas!</p>
 
 
@@ -37,7 +38,7 @@ const PerfilProfessor = () => {
       <main className="conteudo">
         <div className="barra-bemvindo">
           <div className="bemvindo-texto">
-            <h2>Bem-vindo(a), Prof. Nathália Almeida.</h2>
+            <h2>Bem-vindo(a), .</h2>
           </div>
         </div>
 
@@ -69,4 +70,4 @@ const PerfilProfessor = () => {
   );
 };
 
-export default PerfilProfessor;
+export default Perfil;

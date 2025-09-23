@@ -4,7 +4,7 @@ body {
 
 /* --- Começo da Barra lateral --- */
 /*onde fica a parte do professor e afins*/
-.perfil-professor {
+.perfil-usuário {
   display: flex;
   height: 100vh;
   font-family: Arial, sans-serif;
@@ -20,7 +20,7 @@ body {
   box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.foto-professor {
+.foto-usuário {
   border-radius: 90%;
   border: 3px solid #00ffff;
   width: 140px;
