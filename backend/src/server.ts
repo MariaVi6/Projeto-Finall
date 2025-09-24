@@ -153,11 +153,18 @@ app.delete('/usuarios/:id', async (req, res) => {
   }
 });
 
+<<<<<<< HEAD
 
 app.post('/usuarios/:id/notas', async (req, res) => {
   try {
     const usuarioId = parseInt(req.params.id);
     const { conteudo } = req.body; 
+=======
+app.post('/usuarios/:id/notas', async (req, res) => {
+  try {
+    const usuarioId = parseInt(req.params.id);
+    const { conteudo } = req.body;
+>>>>>>> ef6f00e2539cb73d9b781427c37a58782a6352bf
 
     if (!conteudo || conteudo.trim() === "") {
       res.status(400).json({ message: "Recado não pode ser vazio" });
@@ -172,7 +179,11 @@ app.post('/usuarios/:id/notas', async (req, res) => {
     }
 
     const nota = await prisma.nota.create({
+<<<<<<< HEAD
       data: { conteudo, usuarioId }
+=======
+      data: { conteudo, usuario: { connect: { id: usuarioId } } }
+>>>>>>> ef6f00e2539cb73d9b781427c37a58782a6352bf
     });
 
     res.status(201).json({ message: "Recado criado com sucesso", nota });
@@ -181,7 +192,10 @@ app.post('/usuarios/:id/notas', async (req, res) => {
   }
 });
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> ef6f00e2539cb73d9b781427c37a58782a6352bf
 app.get('/usuarios/:id/notas', async (req, res) => {
   const usuarioId = parseInt(req.params.id);
   try {
@@ -193,7 +207,10 @@ app.get('/usuarios/:id/notas', async (req, res) => {
   }
 });
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> ef6f00e2539cb73d9b781427c37a58782a6352bf
 app.put('/notas/:id', async (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -215,7 +232,10 @@ app.put('/notas/:id', async (req, res) => {
   }
 });
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> ef6f00e2539cb73d9b781427c37a58782a6352bf
 app.delete('/notas/:id', async (req, res) => {
   try {
     const id = parseInt(req.params.id);
