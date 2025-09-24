@@ -20,8 +20,7 @@ model Usuario {
 
 model Nota {
   id Int @id @default(autoincrement())
-  resultado Float
-  materia String
+  conteudo String
   usuarioId Int
   usuario Usuario @relation(fields: [usuarioId], references: [id])
 }

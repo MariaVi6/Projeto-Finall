@@ -1,19 +1,19 @@
 import "./Perfil.css";
-
+import { useState } from 'react'
 const Perfil = () => {
-  const [usuario, setUsuario] = useState(JSON.parse(localStorage.getItem('usuario')) || null)
+  const [usuario] = useState(JSON.parse(localStorage.getItem('usuario')) || null)
   return (
     <div className="perfil-usuário">
 
       <aside className="barra-lateral">
         <img
           className="foto-usuário"
-          src="https://cdn-icons-png.flaticon.com/512/3106/3106807.png"
+          src="https://img.icons8.com/?size=100&id=HmQQr0jYHZxu&format=png&color=000000"
 
           alt="Icone de Foto de Perfil do usuário"
         />
         <h3>Olá, {usuario && (usuario.nome || 'Fulano de Tal')}</h3>
-        <p>Docente em Análise e Desenvolvimento de Sistemas!</p>
+        <p>Bem vindo ao seu perfil onde você fica por dentro dos assuntos! 💜</p>
 
 
         <nav className="menu-barra-lateral">
@@ -38,7 +38,7 @@ const Perfil = () => {
       <main className="conteudo">
         <div className="barra-bemvindo">
           <div className="bemvindo-texto">
-            <h2>Bem-vindo(a), .</h2>
+            <h2>Bem-vindo(a), {usuario && (usuario.nome || 'Fulano de Tal')}</h2>
           </div>
         </div>
 

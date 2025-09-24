@@ -2,7 +2,7 @@ import Chat from './Chat';
 import './CorpoHome.css';
 import { useState, useEffect } from 'react';
 
-const CorpoHome = ({ userId, token, nome }) => {
+const CorpoHome = ({ usuarioId, token, nome }) => {
   const [texto, setTexto] = useState('');
   const [notas, setNotas] = useState([]);
   const [noticias, setNoticias] = useState([]);
@@ -19,10 +19,10 @@ const CorpoHome = ({ userId, token, nome }) => {
 
   // Buscar notas do usuário
   const buscarNotas = async () => {
-    if (!userId) return;
+    if (!usuarioId) return;
 
     try {
-      const response = await fetch(`http://localhost:3000/usuarios/${userId}/notas`);
+      const response = await fetch(`http://localhost:3000/usuarios/${usuarioId}/notas`);
       if (!response.ok) throw new Error('Erro ao buscar notas');
       const data = await response.json();
       if (data && data.notas) setNotas(data.notas);
@@ -33,20 +33,21 @@ const CorpoHome = ({ userId, token, nome }) => {
 
   useEffect(() => {
     buscarNotas();
-  }, [userId]);
+  }, [usuarioId]);
 
   // Adicionar nota
   const adicionarNota = async () => {
-    if (!texto.trim() || !userId) {
+    if (!texto.trim()) {
       alert("Erro: Usuário não encontrado ou texto vazio.");
       return;
     }
 
     try {
-      const response = await fetch(`http://localhost:3000/usuarios/${userId}/notas`, {
+      const response = await fetch(`http://localhost:3000/usuarios/${usuarioId}/notas`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ resultado: texto, materia: 'Geral' }),
+        body: JSON.stringify({ conteudo: texto }), // ajustado para conteudo
+        
       });
 
       if (!response.ok) throw new Error('Erro ao adicionar nota');
@@ -112,7 +113,7 @@ const CorpoHome = ({ userId, token, nome }) => {
           <div className="caixa-guarda-notas">
             {notas.map((nota) => (
               <div className="nota" key={nota.id}>
-                {nota.resultado}
+                {nota.conteudo} {/* ajustado para conteudo */}
                 <button className="botao-excluir-notas" onClick={() => deletarNota(nota.id)}>
                   Excluir
                 </button>
@@ -123,7 +124,7 @@ const CorpoHome = ({ userId, token, nome }) => {
 
         <div className="assistente-virtual">
           <h2 className="titulo-assistente-virtual">Assistente Virtual</h2>
-          <Chat userId={userId} token={token} nome={nome} />
+          <Chat usuarioId={usuarioId} token={token} nome={nome} />
         </div>
       </div>
     </div>

@@ -17,13 +17,11 @@ app.get('/', async (_req, res) => {
   res.status(200).json({ message: "ok" });
 });
 
-// LISTAR USUÁRIOS
 app.get('/usuarios', async (_req, res) => {
   const usuarios = await prisma.usuario.findMany();
   res.json(usuarios);
 });
 
-// BUSCAR USUÁRIO POR ID
 app.get('/usuarios/:id', async (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -40,7 +38,6 @@ app.get('/usuarios/:id', async (req, res) => {
   }
 });
 
-// CADASTRAR
 app.post('/usuarios', async (req, res) => {
   try {
     const { email, senha, nome } = req.body;
@@ -81,7 +78,6 @@ app.post('/usuarios', async (req, res) => {
   }
 });
 
-// LOGIN
 app.post('/logar', async (req, res) => {
   try {
     const { email, senha } = req.body;
@@ -117,7 +113,6 @@ app.post('/logar', async (req, res) => {
   }
 });
 
-// ATUALIZAR SENHA
 app.put('/usuarios/:id', async (req, res) => {
   try {
     const id = parseInt(req.params.id);
@@ -140,7 +135,6 @@ app.put('/usuarios/:id', async (req, res) => {
   }
 });
 
-// DELETAR USUÁRIO
 app.delete('/usuarios/:id', async (req, res) => {
   const id = parseInt(req.params.id);
   try {
@@ -159,19 +153,14 @@ app.delete('/usuarios/:id', async (req, res) => {
   }
 });
 
-// CRIAR NOTA
+
 app.post('/usuarios/:id/notas', async (req, res) => {
   try {
     const usuarioId = parseInt(req.params.id);
-    const { resultado, materia } = req.body;
+    const { conteudo } = req.body; 
 
-    if (resultado == null) {
-      res.status(400).json({ message: "Resultado inválido" });
-      return;
-    }
-
-    if (!materia) {
-      res.status(400).json({ message: "Matéria é obrigatória" });
+    if (!conteudo || conteudo.trim() === "") {
+      res.status(400).json({ message: "Recado não pode ser vazio" });
       return;
     }
 
@@ -183,73 +172,61 @@ app.post('/usuarios/:id/notas', async (req, res) => {
     }
 
     const nota = await prisma.nota.create({
-      data: { resultado, materia, usuario: { connect: { id: usuarioId } } }
+      data: { conteudo, usuarioId }
     });
 
-    res.status(201).json({ message: "Nota criada com sucesso", nota });
+    res.status(201).json({ message: "Recado criado com sucesso", nota });
   } catch (error) {
     res.status(500).json({ message: `Erro inesperado: ${error}` });
   }
 });
 
-// LISTAR NOTAS DE UM USUÁRIO
+
 app.get('/usuarios/:id/notas', async (req, res) => {
-  const id = parseInt(req.params.id);
+  const usuarioId = parseInt(req.params.id);
   try {
-    const usuario = await prisma.usuario.findUnique({
-      where: { id },
-      include: { notas: true }
-    });
+    const notas = await prisma.nota.findMany({ where: { usuarioId } });
 
-    if (!usuario) {
-      res.status(404).json({ message: "Usuário não encontrado" });
-      return;
-    }
-
-    res.json(usuario);
+    res.json({ notas }); 
   } catch (error) {
     res.status(500).json({ message: `Erro inesperado: ${error}` });
   }
 });
 
-// ATUALIZAR NOTA
+
 app.put('/notas/:id', async (req, res) => {
   try {
     const id = parseInt(req.params.id);
-    const { resultado, materia } = req.body;
+    const { conteudo } = req.body;
 
-    if (resultado == null) {
-      res.status(400).json({ message: "Resultado inválido" });
-      return;
-    }
-
-    if (!materia) {
-      res.status(400).json({ message: "Matéria é obrigatória" });
+    if (!conteudo || conteudo.trim() === "") {
+      res.status(400).json({ message: "Recado não pode ser vazio" });
       return;
     }
 
     const nota = await prisma.nota.update({
       where: { id },
-      data: { resultado, materia }
+      data: { conteudo }
     });
 
-    res.json({ message: "Nota atualizada com sucesso", nota });
+    res.json({ message: "Recado atualizado com sucesso", nota });
   } catch (error) {
     res.status(500).json({ message: `Erro inesperado: ${error}` });
   }
 });
 
-// DELETAR NOTA
+
 app.delete('/notas/:id', async (req, res) => {
   try {
     const id = parseInt(req.params.id);
     const nota = await prisma.nota.delete({ where: { id } });
 
-    res.json({ message: "Nota deletada com sucesso", nota });
+    res.json({ message: "Recado deletado com sucesso", nota });
   } catch (error) {
     res.status(500).json({ message: `Erro inesperado: ${error}` });
   }
 });
+
 
 app.get('/noticias', async (_req, res) => {
   try {
