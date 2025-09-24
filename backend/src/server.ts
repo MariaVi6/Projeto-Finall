@@ -171,11 +171,7 @@ app.post('/usuarios/:id/notas', async (req, res) => {
     }
 
     const nota = await prisma.nota.create({
-<<<<<<< HEAD
-      data: { conteudo, usuarioId }
-=======
       data: { conteudo, usuario: { connect: { id: usuarioId } } }
->>>>>>> ef6f00e2539cb73d9b781427c37a58782a6352bf
     });
 
     res.status(201).json({ message: "Recado criado com sucesso", nota });
