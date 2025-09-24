@@ -231,10 +231,6 @@ app.delete('/notas/:id', async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta http://localhost:${PORT}`);
-});
-
 app.get('/noticias', async (_req, res) => {
   try {
     const apiKey = process.env.GNEWS_API_KEY;
