@@ -12,6 +12,9 @@
   margin: 0;
   padding: 0;
 }
+a{
+    text-decoration: none;
+}
 
 html,
 body {
@@ -68,7 +71,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 12px;
+    font-size: 10px;
     line-height: 22px;
     margin-bottom: 5px;
     text-align: center;
@@ -181,4 +184,24 @@ body {
     font-weight: 500;
     margin-bottom: 40px;
     box-shadow: 0 2px 2px rgba(0, 25, 149, 0.35);
+}
+
+
+@media screen and (min-width: 1365px) {
+    .container-home{
+        gap: 20px;
+    }
+
+    .div-calendarios-eventos{
+        width: 900px;
+    }
+    .calendarios-eventos{
+        width: 900px;
+    }
+    .titulo-calendarios-eventos{
+        width: 100%;
+    }
+    .itens-calendarios-eventos{
+        width: 100%;
+    }
 }

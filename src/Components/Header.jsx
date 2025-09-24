@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import './Header.css'
 
@@ -39,7 +40,7 @@ const Header = () => {
           <div className="itens-indice-header">Assistente Virtual</div>
         </div>
         <div className="login-aluno">
-          <div className="aluno">Bem Vindo{" "}{usuario && (usuario.nome || 'Fulano de Tal')}</div>
+          <Link to={"/perfilaluno"}> <div className="aluno">Bem Vindo{" "}{usuario && (usuario.nome || 'Fulano de Tal')}</div></Link>
           <div className="div-botao-sair">
             <a className="cursor-pointer" onClick={logout}>
               Sair

@@ -261,7 +261,7 @@ app.get('/noticias', async (_req, res) => {
     }
 
     const response = await fetch(
-      `https://gnews.io/api/v4/search?q=educação&lang=pt&country=br&max=6&apikey=${apiKey}`
+      `https://gnews.io/api/v4/search?q=educação&in=title&lang=pt&country=br&max=6&apikey=${apiKey}`
     );
 
     if (!response.ok) {
