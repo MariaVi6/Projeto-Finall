@@ -68,7 +68,7 @@ app.post('/usuarios', async (req, res) => {
     res.status(201).json({
       message: "Usuário adicionado com sucesso",
       data: {
-        usuario: { nome: adicionar.nome },
+        usuario: { id: adicionar.id, nome: adicionar.nome },
         "access_token": token,
       }
     });
@@ -104,7 +104,7 @@ app.post('/logar', async (req, res) => {
     res.status(200).json({
       message: "Logado com sucesso",
       data: {
-        usuario: { nome: usuario.nome },
+        usuario: { id: usuario.id, nome: usuario.nome },
         "access_token": token,
       }
     });
@@ -185,7 +185,7 @@ app.get('/usuarios/:id/notas', async (req, res) => {
   try {
     const notas = await prisma.nota.findMany({ where: { usuarioId } });
 
-    res.json({ notas }); 
+    res.json({ notas });
   } catch (error) {
     res.status(500).json({ message: `Erro inesperado: ${error}` });
   }
@@ -364,7 +364,7 @@ app.post('/chat', async (req, res) => {
       ${systemInstruction}
 
       !! INÍCIO - CONTEXTO DO USUÁRIO !!
-      Bloco de Notas/Anotações do estudante: ${notas ? notas : 'Nenhuma encontrada'}.
+      Bloco de Notas/Anotações do estudante: ${notas ? JSON.stringify(notas) : 'Nenhuma encontrada'}.
       Matrícula/ID do estudante: ${usuario.id ? usuario.id : 'Não encontrada'}.
       Nome do estudante: ${usuario.nome ? usuario.nome : 'Não encontrado'}.
       !! FIM - CONTEXTO DO USUÁRIO !!

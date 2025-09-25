@@ -39,7 +39,7 @@ body {
 }
 
 /*Menu da barra lateral */
-/*onde fica os icones de */
+
 .menu-barra-lateral {
   margin-top: 20px;
   display: flex;
@@ -66,7 +66,7 @@ body {
 }
 
 .menu-barra-lateral img {
-  color:#f9f9f9;
+  color: #f9f9f9;
   width: 20px;
   height: 20px;
 }
@@ -88,7 +88,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .barra-bemvindo h2 {
@@ -107,7 +107,7 @@ body {
   background: #fff;
   padding: 20px;
   border-radius: 12px;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
   transition: 0.3s;
 }
 

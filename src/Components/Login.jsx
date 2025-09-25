@@ -147,7 +147,7 @@ const Login = () => {
               Acessar
             </button>
             <h6 className="trocar-paineis" onClick={() => trocarModo('registro')}>
-              Não tem conta? Registrar-se
+              Não tem conta? Registre-se
             </h6>
           </form>
 

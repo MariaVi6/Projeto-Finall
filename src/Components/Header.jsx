@@ -40,13 +40,13 @@ const Header = () => {
           <div className="itens-indice-header">Assistente Virtual</div>
         </div>
         <div className="login-aluno">
-          <Link to={"/perfil"}> <div className="aluno">Bem Vindo{" "}{usuario && (usuario.nome || 'Fulano de Tal')}</div></Link>
+          <Link to={"/perfil"}> <div className="aluno">Bem Vindo, {" "}{usuario && (usuario.nome || 'Fulano de Tal')}</div></Link>
           <div className="div-botao-sair">
             <a className="cursor-pointer" onClick={logout}>
               Sair
             </a>
           </div>
-        </div> 
+        </div>
       </div>
     </>
   )

@@ -1,12 +1,16 @@
 import Chat from './Chat';
 import './CorpoHome.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
-const CorpoHome = ({ usuarioId, token, nome }) => {
+
+const CorpoHome = () => {
   const [texto, setTexto] = useState('');
   const [notas, setNotas] = useState([]);
   const [noticias, setNoticias] = useState([]);
 
+  const [usuario] = useState(JSON.parse(localStorage.getItem('usuario')) || null)
+
+  const usuarioId = usuario.id
   // Buscar notícias
   useEffect(() => {
     fetch("http://localhost:3000/noticias")
@@ -18,27 +22,27 @@ const CorpoHome = ({ usuarioId, token, nome }) => {
   }, []);
 
   // Buscar notas do usuário
-  const buscarNotas = async () => {
+  const buscarNotas = useCallback(async () => {
     if (!usuarioId) return;
-
     try {
       const response = await fetch(`http://localhost:3000/usuarios/${usuarioId}/notas`);
       if (!response.ok) throw new Error('Erro ao buscar notas');
       const data = await response.json();
+      console.log(data)
       if (data && data.notas) setNotas(data.notas);
     } catch (err) {
       console.error('Erro ao buscar notas:', err);
     }
-  };
+  }, [usuarioId]);
 
   useEffect(() => {
     buscarNotas();
-  }, [usuarioId]);
+  }, [buscarNotas]);
 
   // Adicionar nota
   const adicionarNota = async () => {
     if (!texto.trim()) {
-      alert("Erro: Usuário não encontrado ou texto vazio.");
+      alert("Erro: Us || usuarioId) {io não encontrado ou texto vazio.");
       return;
     }
 
@@ -46,14 +50,13 @@ const CorpoHome = ({ usuarioId, token, nome }) => {
       const response = await fetch(`http://localhost:3000/usuarios/${usuarioId}/notas`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ conteudo: texto }), // ajustado para conteudo
-        
+        body: JSON.stringify({ conteudo: texto }),
       });
 
       if (!response.ok) throw new Error('Erro ao adicionar nota');
 
       const { nota } = await response.json();
-      setNotas([...notas, nota]);
+      setNotas((prevNotas) => ([...prevNotas, nota]));
       setTexto('');
     } catch (err) {
       console.error('Erro ao adicionar nota:', err);
@@ -124,7 +127,7 @@ const CorpoHome = ({ usuarioId, token, nome }) => {
 
         <div className="assistente-virtual">
           <h2 className="titulo-assistente-virtual">Assistente Virtual</h2>
-          <Chat usuarioId={usuarioId} token={token} nome={nome} />
+          <Chat />
         </div>
       </div>
     </div>
@@ -132,3 +135,4 @@ const CorpoHome = ({ usuarioId, token, nome }) => {
 };
 
 export default CorpoHome;
+
